@@ -1,0 +1,64 @@
+<idea-plugin version="2">
+    <id>ccm.veontomo.lineup</id>
+    <name>Line up the class lifecycle methods</name>
+    <version>0.2</version>
+    <vendor email="veontomo at google mail com" url="https://veontomo.github.io/Lineup/">veontomo</vendor>
+
+    <description><![CDATA[
+    The plugin lines up fields and the Android lifecycle methods of Kotlin and Java classes. After applying the plugin,
+    the class declaration is to have the following structure:
+    <ol>
+    <li>field declarations</li>
+    <li>lifecycle method declarations</li>
+    <li>other method declarations</li>
+    </ol>
+    The lifecycle methods are those of both activities and fragments and become sorted in this order:
+    <ol>
+        <li>onAttach</li>
+        <li>onCreate</li>
+        <li>onCreateView</li>
+        <li>onViewCreated</li>
+        <li>onActivityCreated</li>
+        <li>onViewStateRestored</li>
+        <li>onRestoreInstanceState</li>
+        <li>onRestart</li>
+        <li>onStart</li>
+        <li>onResume</li>
+        <li>onPause</li>
+        <li>onSaveInstanceState</li>
+        <li>onStop</li>
+        <li>onDestroyView</li>
+        <li>onDestroy</li>
+        <li>onDetach</li>
+    </ol>
+    The idea of this plugin is inspired by <a href="https://github.com/armandAkop/Lifecycle-Sorter">Lifecycle Sorter for Android Studio</a> one.
+    ]]></description>
+
+    <change-notes><![CDATA[
+      Add change notes here.<br>
+      <em>most HTML tags may be used</em>
+    ]]>
+    </change-notes>
+
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
+    <idea-version since-build="145.0"/>
+
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+         on how to target different products -->
+    <!-- uncomment to enable plugin in all products
+    <depends>com.intellij.modules.lang</depends>
+    -->
+
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- Add your extensions here -->
+    </extensions>
+
+    <actions>
+        <action id="Rearrange" class="com.veontomo.lineup.LineupAction" text="Line up fields/methods">
+            <add-to-group group-id="CodeFormatGroup" anchor="last"/>
+            <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl S"/>
+        </action>
+        <!-- Add your actions here -->
+    </actions>
+
+</idea-plugin>
