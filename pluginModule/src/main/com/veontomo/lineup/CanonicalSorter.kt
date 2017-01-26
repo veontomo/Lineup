@@ -3,6 +3,7 @@ package com.veontomo.lineup
 import com.intellij.psi.PsiClass
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiMethod
+
 //import org.jetbrains.kotlin.asJava.elements.KtLightElement
 //import org.jetbrains.kotlin.psi.KtClass
 //import org.jetbrains.kotlin.psi.KtElement
@@ -41,31 +42,19 @@ class CanonicalSorter(private val aClass: PsiClass, private val lineup: Array<St
 //
 //            notifier.notify("exception: ${e.message}")
 //        }
-//        val methods = aClass.methods
-//        val fields = aClass.fields
-//        val sorted = lineupFilter(methods)
-//        val pivot = getFirstMethodOrField(aClass)?.navigationElement
-//        val parent = pivot?.parent?.navigationElement
-//        if (pivot != null && parent != null) {
-//             place the fields after the pivot
-//            try {
-//                for (field in fields) {
-//                    if (field != null) {
-//                        parent.addBefore(field.navigationElement, pivot)
-//                    } else {
-//                        notifier.notify("field is null")
-//                    }
-//                }
-//            } catch(e: Exception) {
-//                notifier.notify("exception: ${e.message}")
-//            }
-//            fields.forEach { parent?.addBefore(it.navigationElement, pivot) }
+        val methods = aClass.methods
+        val fields = aClass.fields
+        val sorted = lineupFilter(methods)
+        val pivot = getFirstMethodOrField(aClass)?.navigationElement
+        val parent = pivot?.parent?.navigationElement
+        if (pivot != null && parent != null) {
+            fields.forEach { parent.addBefore(it.navigationElement, pivot) }
 //             place the lineup methods after the fields
-//            sorted.forEach { parent.addBefore(it.navigationElement, pivot) }
+            sorted.forEach { parent.addBefore(it.navigationElement, pivot) }
 //             remove the above inserted elements in order to avoid duplicates
-//            fields.forEach { it.navigationElement.delete() }
-//            sorted.forEach { it.navigationElement.delete() }
-//        }
+            fields.forEach { it.navigationElement?.delete() }
+            sorted.forEach { it.navigationElement?.delete() }
+        }
     }
 
     /**

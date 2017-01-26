@@ -2,8 +2,9 @@ package com.veontomo.lineup
 
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
-import com.intellij.openapi.command.WriteCommandAction
+import com.intellij.openapi.actionSystem.LangDataKeys
 import com.intellij.psi.PsiClass
+import com.intellij.psi.PsiClassOwner
 import com.intellij.psi.PsiFile
 
 /**
@@ -24,14 +25,13 @@ class LineupAction : AnAction() {
 
     override
     fun actionPerformed(e: AnActionEvent) {
-        notifier.notify("ciao")
-//        final PsiFile psiFile = e.getData(LangDataKeys.PSI_FILE);
-//        PsiClass[] psiClasses = getPsiClasses(psiFile);
-//        if (psiClasses != null) {
-//            elaborateMultipleClasses(psiClasses);
-//        } else {
-//            notifier.notify("no class is found");
-//        }
+        val psiFile = e.getData(LangDataKeys.PSI_FILE)
+        if (psiFile != null) {
+            val psiClasses = getPsiClasses(psiFile)
+            elaborateMultipleClasses(psiClasses)
+        } else {
+            notifier.notify("no class is found");
+        }
 
     }
 
@@ -50,20 +50,7 @@ class LineupAction : AnAction() {
      * @param aClass a class whose methods and fields are to be ordered.
      */
     private fun elaborateSingleClass(aClass: PsiClass) {
-        val sorter = CanonicalSorter(aClass, BASE_METHOD_NAMES)
-        sorter.execute()
-//        WriteCommandAction.Simple(aClass.project, aClass.containingFile){
-
-//        }
-//        WriteCommandAction.Simple(aClass.project, aClass.containingFile) {
-//
-//        }.execute()
-//        WriteCommandAction.Simple(aClass.getProject(), aClass.getContainingFile()) {
-//            override
-//            protected void run() throws Throwable {
-//            }
-//        }.execute();
-
+        Worker().execute(aClass, BASE_METHOD_NAMES)
     }
 
 
@@ -73,11 +60,10 @@ class LineupAction : AnAction() {
      * @param psiFile current psi file
      * @return array of PsiClass instances
      */
-    private fun getPsiClasses(psiFile: PsiFile): Array<PsiClass>? {
-
-//        if (psiFile != null && psiFile instanceof PsiClassOwner) {
-//            return ((PsiClassOwner) psiFile).getClasses();
-//        }
-        return null
+    private fun getPsiClasses(psiFile: PsiFile): Array<PsiClass> {
+        if (psiFile is PsiClassOwner) {
+            return psiFile.classes
+        }
+        return arrayOf()
     }
 }
