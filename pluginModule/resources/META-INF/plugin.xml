@@ -35,8 +35,7 @@
     ]]></description>
 
     <change-notes><![CDATA[
-      Add change notes here.<br>
-      <em>most HTML tags may be used</em>
+      make it possible to be used with Android Studio.
     ]]>
     </change-notes>
 
