@@ -35,7 +35,7 @@
     ]]></description>
 
     <change-notes><![CDATA[
-      <ol><li>lower the minimal IntelliJ IDEA build number that is compatible with the plugin.</li></ol>
+      <ul><li>lower the minimal IntelliJ IDEA build number that is compatible with the plugin.</li></ul>
     ]]>
     </change-notes>
 
