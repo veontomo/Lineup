@@ -35,7 +35,7 @@
     ]]></description>
 
     <change-notes><![CDATA[
-      make it possible to be used with Android Studio.
+      <ol><li>lower the minimal IntelliJ IDEA build number that is compatible with the plugin.</li></ol>
     ]]>
     </change-notes>
 
