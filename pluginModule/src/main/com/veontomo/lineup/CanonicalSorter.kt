@@ -26,22 +26,6 @@ class CanonicalSorter(private val aClass: PsiClass, private val lineup: Array<St
      * Perform the ordering of the class methods and fields.
      */
     fun execute() {
-//        try {
-//
-//            if (aClass is KtLightElement<*, *>) {
-//                notifier.notify("aClass is a KtLightElement")
-//            } else {
-//                notifier.notify("aClass is not a KtLightElement")
-//            }
-//            if (aClass is KtClass) {
-//                notifier.notify("aClass is a KtClass")
-//            } else {
-//                notifier.notify("aClass is not a KtClass")
-//            }
-//        } catch (e: Exception) {
-//
-//            notifier.notify("exception: ${e.message}")
-//        }
         val methods = aClass.methods
         val fields = aClass.fields
         val sorted = lineupFilter(methods)
@@ -52,8 +36,8 @@ class CanonicalSorter(private val aClass: PsiClass, private val lineup: Array<St
 //             place the lineup methods after the fields
             sorted.forEach { parent.addBefore(it.navigationElement, pivot) }
 //             remove the above inserted elements in order to avoid duplicates
-            fields.forEach { it.navigationElement?.delete() }
-            sorted.forEach { it.navigationElement?.delete() }
+            fields.forEach { it.navigationElement.delete() }
+            sorted.forEach { it.navigationElement.delete() }
         }
     }
 
