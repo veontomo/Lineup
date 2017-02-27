@@ -1,8 +1,12 @@
+apply plugin: 'kotlin'
 buildscript {
-    ext.kotlin_version = '1.0.6'
+    ext.kotlin_version = '1.1.2'
 
     repositories {
         mavenCentral()
+        maven {
+            url 'https://dl.bintray.com/kotlin/kotlin-dev/'
+        }
     }
 
     dependencies {
@@ -13,6 +17,9 @@ buildscript {
 allprojects {
     repositories {
         mavenCentral()
+        maven {
+            url 'https://dl.bintray.com/kotlin/kotlin-dev/'
+        }
     }
 }
 apply plugin: 'idea'
