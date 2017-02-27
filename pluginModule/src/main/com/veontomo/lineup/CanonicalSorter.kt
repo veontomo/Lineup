@@ -28,7 +28,7 @@ class CanonicalSorter(private val aClass: PsiClass, private val lineup: Array<St
     fun execute() {
         val methods = aClass.methods
         val fields = aClass.fields
-        val sorted = lineupFilter(methods)
+        val sorted = lineupFilter(methods, lineup)
         val pivot = getFirstMethodOrField(aClass)?.navigationElement
         val parent = pivot?.parent?.navigationElement
         if (pivot != null && parent != null) {
@@ -42,10 +42,11 @@ class CanonicalSorter(private val aClass: PsiClass, private val lineup: Array<St
     }
 
     /**
+     * Discard methods
      * Return methods which names are in the lineup array respecting the order in which they
      * appear in the lineup.
-     * If their exists a pair of methods m1 and m2 such that
-     * their names are in the lineup array at positions  i1 and i2 respectively,
+     * If there exists a pair of methods m1 and m2 such that
+     * their names are in the lineup array at positions i1 and i2 respectively,
      * and i1 < i2, then the positions r1 and r2 of the methods m1 and m2 in the
      * resulting array must obey the relation:
      * r1 < r2.
@@ -54,9 +55,9 @@ class CanonicalSorter(private val aClass: PsiClass, private val lineup: Array<St
      *
      * @return methods from the above array whose names are in the lineup; the order is defined above.
      */
-    fun lineupFilter(methods: Array<PsiMethod>): Array<PsiMethod> {
+    fun lineupFilter(methods: Array<PsiMethod>, filter: Array<String>): Array<PsiMethod> {
         val list = mutableListOf<PsiMethod>()
-        for (methodName in lineup) {
+        for (methodName in filter) {
             methods.forEach { if (it.name == methodName) list.add(it) }
         }
         return list.toTypedArray()

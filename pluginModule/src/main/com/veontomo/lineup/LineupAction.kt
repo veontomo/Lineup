@@ -21,7 +21,7 @@ class LineupAction : AnAction() {
             "onDestroyView", "onDestroy", "onDetach"
     )
 
-    private val notifier = Notifier("Lineup plugin");
+    private val notifier = Notifier("Lineup plugin")
 
     override
     fun actionPerformed(e: AnActionEvent) {
@@ -30,7 +30,7 @@ class LineupAction : AnAction() {
             val psiClasses = getPsiClasses(psiFile)
             elaborateMultipleClasses(psiClasses)
         } else {
-            notifier.notify("no class is found");
+            notifier.notify("no class is found")
         }
 
     }
