@@ -27,8 +27,11 @@ class CanonicalSorter(private val aClass: PsiClass, private val lineup: Array<St
      */
     fun execute() {
         val methods = aClass.methods
+        notifier.notify("methods: ${methods.joinToString{it.name}}")
         val fields = aClass.fields
+        notifier.notify("fields: ${fields.joinToString{it.name ?: "nameless field"}}")
         val sorted = lineupFilter(methods, lineup)
+        notifier.notify("sorted: ${sorted.joinToString { it.name }}")
         val pivot = getFirstMethodOrField(aClass)?.navigationElement
         val parent = pivot?.parent?.navigationElement
         if (pivot != null && parent != null) {
@@ -64,7 +67,6 @@ class CanonicalSorter(private val aClass: PsiClass, private val lineup: Array<St
      * Return the first child that is either a field or a method.
 
      * @param aClass
-     * *
      * @return a method or a field with the lowest offset
      */
     fun getFirstMethodOrField(aClass: PsiClass): PsiElement? {
@@ -72,11 +74,14 @@ class CanonicalSorter(private val aClass: PsiClass, private val lineup: Array<St
         val fields = aClass.fields
         val methodTotal = methods.size
         val fieldTotal = fields.size
+        notifier.notify("# methods: $methodTotal, # fields: $fieldTotal")
         if (methodTotal == 0 && fieldTotal == 0) return null
         if (methodTotal == 0) return fields[0]
         if (fieldTotal == 0) return methods[0]
         val firstMethodOffset = methods[0].navigationElement.startOffsetInParent
         val firstFieldOffset = fields[0].navigationElement.startOffsetInParent
+
+        notifier.notify("first method offset: $firstMethodOffset, first field offset: $firstFieldOffset")
         return if (firstFieldOffset > firstMethodOffset) methods[0] else fields[0]
     }
 
