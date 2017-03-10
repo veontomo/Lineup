@@ -1,6 +1,6 @@
 <idea-plugin version="2">
     <id>ccm.veontomo.lineup</id>
-    <name>Line up the class lifecycle methods</name>
+    <name>Line up the class lifecycle methods (LOCAL)</name>
     <version>0.3</version>
     <vendor email="veontomo at google mail com" url="https://veontomo.github.io/Lineup/">veontomo</vendor>
 
@@ -45,7 +45,7 @@
     </extensions>
 
     <actions>
-        <action id="Rearrange" class="com.veontomo.lineup.LineupAction" text="Line up fields/methods">
+        <action id="Rearrange" class="com.veontomo.lineup.LineupAction" text="Line up fields/methods (LOCAL)">
             <add-to-group group-id="CodeFormatGroup" anchor="last"/>
             <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl S"/>
         </action>

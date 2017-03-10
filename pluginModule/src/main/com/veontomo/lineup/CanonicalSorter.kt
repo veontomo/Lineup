@@ -27,8 +27,11 @@ class CanonicalSorter(private val aClass: PsiClass, private val lineup: Array<St
      */
     fun execute() {
         val methods = aClass.methods
+        notifier.notify("methods: ${methods.joinToString{it.name}}")
         val fields = aClass.fields
-        val sorted = lineupFilter(methods)
+        notifier.notify("fields: ${fields.joinToString{it.name ?: "nameless field"}}")
+        val sorted = lineupFilter(methods, lineup)
+        notifier.notify("sorted: ${sorted.joinToString { it.name }}")
         val pivot = getFirstMethodOrField(aClass)?.navigationElement
         val parent = pivot?.parent?.navigationElement
         if (pivot != null && parent != null) {
@@ -42,22 +45,19 @@ class CanonicalSorter(private val aClass: PsiClass, private val lineup: Array<St
     }
 
     /**
-     * Return methods which names are in the lineup array respecting the order in which they
-     * appear in the lineup.
-     * If their exists a pair of methods m1 and m2 such that
-     * their names are in the lineup array at positions  i1 and i2 respectively,
-     * and i1 < i2, then the positions r1 and r2 of the methods m1 and m2 in the
-     * resulting array must obey the relation:
-     * r1 < r2.
-
-     * @param methods array of methods
+     * Return a new array composed of the elements of the array "pool": only those methods from the array "pool"
+     * end up in the resulting array whose names are present in the array "filter". The order of the elements in the
+     * resulting array respects their order in tha array "filter": if the name of a method M1 comes before the name
+     * of the method M2 in array "filter", then the method M1 must come before the method M2 in the resulting array.
      *
+     * @param pool array of methods
+     * @param filter array of method names defining what methods should be present in the output and in what order.
      * @return methods from the above array whose names are in the lineup; the order is defined above.
      */
-    fun lineupFilter(methods: Array<PsiMethod>): Array<PsiMethod> {
+    fun lineupFilter(pool: Array<PsiMethod>, filter: Array<String>): Array<PsiMethod> {
         val list = mutableListOf<PsiMethod>()
-        for (methodName in lineup) {
-            methods.forEach { if (it.name == methodName) list.add(it) }
+        for (methodName in filter) {
+            pool.forEach { if (it.name == methodName) list.add(it) }
         }
         return list.toTypedArray()
     }
@@ -67,7 +67,6 @@ class CanonicalSorter(private val aClass: PsiClass, private val lineup: Array<St
      * Return the first child that is either a field or a method.
 
      * @param aClass
-     * *
      * @return a method or a field with the lowest offset
      */
     fun getFirstMethodOrField(aClass: PsiClass): PsiElement? {
@@ -75,11 +74,14 @@ class CanonicalSorter(private val aClass: PsiClass, private val lineup: Array<St
         val fields = aClass.fields
         val methodTotal = methods.size
         val fieldTotal = fields.size
+        notifier.notify("# methods: $methodTotal, # fields: $fieldTotal")
         if (methodTotal == 0 && fieldTotal == 0) return null
         if (methodTotal == 0) return fields[0]
         if (fieldTotal == 0) return methods[0]
         val firstMethodOffset = methods[0].navigationElement.startOffsetInParent
         val firstFieldOffset = fields[0].navigationElement.startOffsetInParent
+
+        notifier.notify("first method offset: $firstMethodOffset, first field offset: $firstFieldOffset")
         return if (firstFieldOffset > firstMethodOffset) methods[0] else fields[0]
     }
 

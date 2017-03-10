@@ -1,6 +1,16 @@
-apply plugin: "idea"
+apply plugin: 'idea'
 apply plugin: "kotlin"
+
+buildscript {
+
+    ext.kotlin_version = '1.1.0-rc-91'
+    repositories {
+        maven { url "http://dl.bintray.com/kotlin/kotlin-eap-1.1" }
+        jcenter()
+    }
+}
 sourceSets {
+
     main.java.srcDirs += 'src/main/'
 }
 repositories {
