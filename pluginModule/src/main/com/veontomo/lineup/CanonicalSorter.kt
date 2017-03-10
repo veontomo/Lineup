@@ -3,6 +3,7 @@ package com.veontomo.lineup
 import com.intellij.psi.PsiClass
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiMethod
+import java.lang.Exception
 
 //import org.jetbrains.kotlin.asJava.elements.KtLightElement
 //import org.jetbrains.kotlin.psi.KtClass
@@ -27,22 +28,39 @@ class CanonicalSorter(private val aClass: PsiClass, private val lineup: Array<St
      */
     fun execute() {
         val methods = aClass.methods
-        notifier.notify("methods: ${methods.joinToString{it.name}}")
+        notifier.notify("methods: ${methods.joinToString { it.name }}")
         val fields = aClass.fields
-        notifier.notify("fields: ${fields.joinToString{it.name ?: "nameless field"}}")
+        notifier.notify("fields: ${fields.joinToString { it.name ?: "nameless field" }}")
         val sorted = lineupFilter(methods, lineup)
         notifier.notify("sorted: ${sorted.joinToString { it.name }}")
         val pivot = getFirstMethodOrField(aClass)?.navigationElement
+        notifier.notify("first method or field received, it is ${if (pivot == null) "" else "not"} null")
         val parent = pivot?.parent?.navigationElement
+        notifier.notify("parent: ${if (parent == null) "" else "not"} null")
         if (pivot != null && parent != null) {
-            fields.forEach { parent.addBefore(it.navigationElement, pivot) }
+            fields.forEach { addBefore(it, pivot, parent) }
 //             place the lineup methods after the fields
-            sorted.forEach { parent.addBefore(it.navigationElement, pivot) }
+            sorted.forEach { addBefore(it, pivot, parent) }
 //             remove the above inserted elements in order to avoid duplicates
-            fields.forEach { it.navigationElement.delete() }
-            sorted.forEach { it.navigationElement.delete() }
+            fields.forEach { delete(it) }
+            sorted.forEach { delete(it) }
         }
     }
+
+    private fun addBefore(element: PsiElement, pivot: PsiElement, parent: PsiElement) {
+        notifier.notify("adding ${element.text} before ${pivot.text}, its navigationElement is ${if (element.navigationElement == null) "" else "not"} null.")
+        try {
+            parent.addBefore(element.navigationElement, pivot)
+        } catch (e:Exception ){
+            notifier.notify("failed to add ${element.text} before ${pivot.text}, ${e.message}")
+        }
+    }
+
+    private fun delete(elem: PsiElement) {
+        notifier.notify("deleting ${elem.text}, its navigationElement is ${if (elem.navigationElement == null) "" else "not"} null.")
+        elem.navigationElement.delete()
+    }
+
 
     /**
      * Return a new array composed of the elements of the array "pool": only those methods from the array "pool"
