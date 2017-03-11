@@ -1,1 +1,1 @@
-include ':pluginModule'
+include ':LineupPlugin'

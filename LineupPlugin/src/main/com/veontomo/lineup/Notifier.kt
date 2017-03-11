@@ -4,6 +4,7 @@ import com.intellij.notification.NotificationDisplayType
 import com.intellij.notification.NotificationGroup
 import com.intellij.notification.NotificationType
 import com.intellij.notification.Notifications
+//import org.jetbrains.kotlin.com.intellij.icons.AllIcons.Ide.*
 
 /**
  * Show notifications inside IDE
