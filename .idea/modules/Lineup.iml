@@ -9,6 +9,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="Lineup_main" />
+    <orderEntry type="module" module-name="Lineup_main" exported="" />
+    <orderEntry type="module" module-name="Lineup_test" exported="" />
   </component>
 </module>

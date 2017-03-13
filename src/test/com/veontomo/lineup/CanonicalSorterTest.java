@@ -1,3 +1,4 @@
+package com.veontomo.lineup;
 
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiMethod;
@@ -8,7 +9,7 @@ import static org.junit.Assert.assertTrue;
 
 
 /**
- * Test suit for CanonicalSorter class
+ * Test suit for com.veontomo.lineup.CanonicalSorter class
  */
 public class CanonicalSorterTest {
     private final DumbFactory factory = new DumbFactory();

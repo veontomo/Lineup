@@ -1,4 +1,4 @@
-
+package com.veontomo.lineup
 import com.intellij.notification.NotificationDisplayType
 import com.intellij.notification.NotificationGroup
 import com.intellij.notification.NotificationType

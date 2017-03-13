@@ -1,4 +1,4 @@
-
+package com.veontomo.lineup
 import com.intellij.psi.PsiClass
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiMethod
@@ -24,7 +24,7 @@ import com.intellij.psi.PsiMethod
  */
 class CanonicalSorter(private val aClass: PsiClass, private val lineup: Array<String>) {
 
-    private val notifier = Notifier("CanonicalSorter")
+    private val notifier = Notifier("com.veontomo.lineup.CanonicalSorter")
     /**
      * Perform the ordering of the class methods and fields.
      */

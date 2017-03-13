@@ -1,6 +1,8 @@
+package com.veontomo.lineup;
 
 import com.intellij.openapi.command.WriteCommandAction;
 import com.intellij.psi.PsiClass;
+import com.veontomo.lineup.CanonicalSorter;
 
 /**
  * A java class that encapsulates a call to WriteCommandAction that
