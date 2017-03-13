@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.jetbrains.kotlin:kotlin-gradle-plugin-api:1.1.1-eap-26">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-gradle-plugin-api/1.1.1-eap-26/380899256ed2e4864282f808ba08404c08163f3e/kotlin-gradle-plugin-api-1.1.1-eap-26.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-gradle-plugin-api/1.1.1-eap-26/abd131fac64f92ae62a5ea0125245cbc9784cbb6/kotlin-gradle-plugin-api-1.1.1-eap-26-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

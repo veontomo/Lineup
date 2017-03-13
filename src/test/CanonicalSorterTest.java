@@ -1,4 +1,3 @@
-package com.veontomo.lineup;
 
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiMethod;

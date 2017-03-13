@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.jetbrains.kotlin:kotlin-annotation-processing:1.1.1-eap-26">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-annotation-processing/1.1.1-eap-26/889762108f581c23c5eb46c640367a44eabe80fb/kotlin-annotation-processing-1.1.1-eap-26.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-annotation-processing/1.1.1-eap-26/7bfa6e45564b30c9350cbe7ad7beec333ef8e5ca/kotlin-annotation-processing-1.1.1-eap-26-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

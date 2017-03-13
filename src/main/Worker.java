@@ -1,4 +1,3 @@
-package com.veontomo.lineup;
 
 import com.intellij.openapi.command.WriteCommandAction;
 import com.intellij.psi.PsiClass;

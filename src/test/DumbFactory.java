@@ -1,4 +1,3 @@
-package com.veontomo.lineup;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.Language;
